@@ -26,7 +26,7 @@ namespace Banking.Models.Domain
         #endregion
 
         #region Methods
-        public void Withdraw(decimal amount, string notes = null)
+        public virtual void Withdraw(decimal amount, string notes = null)
         {
             if (notes == null)
                 _transactions.Add(new Transaction(amount, TransactionType.Withdraw));
@@ -55,6 +55,19 @@ namespace Banking.Models.Domain
                     transList.Add(transaction);
             }
             return transList;
+        }
+        public override string ToString()
+        {
+            return $"{AccountNumber} - {Balance}";
+        }
+        public override bool Equals(object obj)
+        {
+            if (!(obj is BankAccount account)) return false;
+            return AccountNumber == account.AccountNumber;
+        }
+        public override int GetHashCode()
+        {
+            return AccountNumber?.GetHashCode() ?? 0;
         }
         #endregion
     }

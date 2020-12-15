@@ -14,11 +14,14 @@ namespace Banking.Models.Domain
         #endregion
 
         #region Constructors
-        public Transaction(decimal amount, TransactionType transactionType, string notes = null)
+        public Transaction(decimal amount, TransactionType transactionType)
         {
             Amount = amount;
             TransactionType = transactionType;
             DateOfTrans = DateTime.Now;
+        }
+        public Transaction(decimal amount, TransactionType transactionType, string notes) : this(amount, transactionType)
+        {
             Notes = notes;
         }
         #endregion
